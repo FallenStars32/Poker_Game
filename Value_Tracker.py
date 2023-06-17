@@ -1,79 +1,18 @@
-
-
 from deck import create_deck
-def deck_value(card1, card2, card3=None,card4=None, card5=None):
-    pass
+from hand_organise import offset_hand, check_reapeats
+def deck_value(*args):
+    hand = []
+    for arg in args:
+        hand.append(arg)
+        
+    OFF_Hand = offset_hand(hand)
+    reapets = check_reapeats(OFF_Hand)
+    return 0 
     
+def high_card(hand):
+    OF_Hand = offset_hand(hand)
+    return sorted(OF_Hand)[-1]
 
-
-def amount_matching(card1=1, card2=14, card3=27, card4=41):
-    hand = sorted([card1, card2, card3, card4])
-    total = []
-    for a in range(0, 4):
-        amount = 0
-        for i in hand:
-            for j in [13, 26, 39]:
-                if hand[a] + j == i:
-                    amount += 1
-        total.append(amount)
-    return max(total) + 1
-    
-
-def offset_hand(hand):
-    for i in range(len(hand)):
-        if 13 >= i > 0:
-            hand[i] = hand[i]
-        if 26 >= hand[i] > 13:
-            hand[i] = hand[i] - 13
-        if 39 >= hand[i] > 13:
-            hand[i] = hand[i] - 26
-        if 52 >= hand[i] > 26:
-            hand[i] = hand[i] - 39
-    return hand
-
-def check_reapeats(hand):
-    total = []
-    for i in hand:
-        amount = 0
-        for j in range(len(hand)):
-            if i == hand[j]:
-                amount += 1
-        total.append(amount)
-    return total
-
-def two_pair(total):
-    amount = 0
-    for i in total: 
-        if i == 2:
-            amount += 1
-    if amount >= 2:
-        return True 
-    else:
-        return False
-    
-def high_card(offset_hand):
-    return sorted(offset_hand)[-1]
-
-def pair(reapets):
-    amount = 0 
-    for i in reapets:
-        if i == 2:
-            amount += 1
-    if amount == 2:
-        return True
-    else:
-        return False
-    
-def three_of_a_kind(reapets):
-    amount = 0
-    for i in reapets:
-        if i == 3:
-            amount += 1
-    if amount == 3:
-        return True
-    else:
-        return False
-    
 def straight(hand):
     hand = sorted(hand) 
     amount = 0
@@ -150,4 +89,3 @@ def royal_flush(hand, offset_hand):
 
 
 
-    
