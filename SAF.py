@@ -29,22 +29,41 @@ def Straight(hand):
     return [False]
 
 def Flush(hand):
-    amount = [0, 0, 0, 0]
+    # Sets up the different groups
+    group = [[], [], [], []]
+    #Finds the Highest Value group
+    HV = 0
     for i in hand:
         if 13 >= i > 0:
-            amount[0] += 1
+            group[0].append(i)
         elif 26 >= i > 13:
-            amount[1] += 1
+            group[1].append(i)
         elif 39 >= i > 26:
-            amount[2] += 1
+            group[2].append(i)
         elif 52 >= i > 13:
-            amount[3] += 1
-    if max(amount) == 4:
-        return True
-    else:
-        return False
-    
-print(Straight([1, 2, 4, 5, 6, 3, 10]))
-    
+            group[3].append(i)
+    for i in range(len(group)):
+        LEN = len(group[i])
+        if LEN >= 5:
+            playing_hand = sorted(group[i])
+            HV = playing_hand[4]
+            for i in range(5):
+                i = playing_hand[i]
+                if i in hand:
+                    hand.remove(i)
+            HC = high_card(hand)
+            return [True, [5, HV, HC]]
+        else:
+            continue
+        
+    return [False]
 
-   
+def straight_flush(hand):
+    A = Flush(hand)
+    B = Straight(hand)
+    if A[0] == True and B[0] == True:
+        return [True, [B[1][0], B[1][1], B[1][2]]]
+    else:
+        return [False]
+    
+print(straight_flush([1, 2, 3, 4, 5, 6, 7]))
