@@ -13,7 +13,7 @@ def amount_matching(card1=1, card2=14, card3=27, card4=41):
 
 def offset_hand(hand):
     for i in range(len(hand)):
-        if 13 >= i > 0:
+        if 13 >= hand[i] > 0:
             hand[i] = hand[i]
         elif 26 >= hand[i] > 13:
             hand[i] = hand[i] - 13

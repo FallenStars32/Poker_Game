@@ -1,6 +1,7 @@
 from SAF import Straight, Flush, straight_flush
 from kind import kind_checker, full_house, two_pair
 from Value_Tracker import high_card, royal_flush
+from hand_organise import offset_hand
 from Deck import deck
 
 
@@ -88,6 +89,6 @@ deck = sorted(deck.create_deck())
 
 
 
-print(hand_value([1, 14, 28, 41], Test = True))
+
 
 
