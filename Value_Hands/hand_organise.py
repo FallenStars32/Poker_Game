@@ -15,11 +15,11 @@ def offset_hand(hand):
     for i in range(len(hand)):
         if 13 >= i > 0:
             hand[i] = hand[i]
-        if 26 >= hand[i] > 13:
+        elif 26 >= hand[i] > 13:
             hand[i] = hand[i] - 13
-        if 39 >= hand[i] > 13:
+        elif 39 >= hand[i] > 13:
             hand[i] = hand[i] - 26
-        if 52 >= hand[i] > 26:
+        elif 52 >= hand[i] > 26:
             hand[i] = hand[i] - 39
     return hand
 

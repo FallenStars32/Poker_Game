@@ -1,4 +1,3 @@
-from deck import create_deck
 from hand_organise import offset_hand, check_reapeats
 def deck_value(*args):
     hand = []
@@ -9,9 +8,16 @@ def deck_value(*args):
     reapets = check_reapeats(OFF_Hand)
     return 0 
     
-def high_card(hand):
-    OF_Hand = offset_hand(hand)
-    return sorted(OF_Hand)[-1]
+def high_card(hand, A = None):
+    if len(hand) == 0:
+        HV = 0
+    else:
+        OF_Hand = offset_hand(hand)
+        HV = sorted(OF_Hand)[-1]
+    # Added because some functions need to see the [Result, [Value_Hand, Hand_Hight_Value, High_Card]] form 
+    if A != None:
+        return [True, [0, HV, HV]]
+    return HV
 
 def straight(hand):
     hand = sorted(hand) 
@@ -67,20 +73,23 @@ def straight_flush(hand):
     else:
         return False
     
-def royal_flush(hand, offset_hand):
+def royal_flush(hand):
+    OFF_hand = offset_hand(hand)
     if flush(hand) is True:
-        if [1, 10, 11, 12, 13] in offset_hand:
-            return True
+        if [9, 10, 11, 12, 13] in OFF_hand:
+            return [True, [13, 13, 13]]
         
-        else:
-            offset_hand = sorted(offset_hand)
-            if offset_hand[0] == 1:
-                if offset_hand[1] == 10:
-                    if offset_hand[2] == 11:
-                        if offset_hand[3] == 12:
-                            if offset_hand[4] == 13:
-                                return True
-            return False
+    else:
+        OFF_hand = sorted(OFF_hand)
+        if 9 in OFF_hand:
+            if 10 in OFF_hand:
+                if 11 in OFF_hand:
+                    if 12 in OFF_hand:
+                        if 13 in OFF_hand:
+                            return [True, [13, 13, 13]]
+        return [False, [0, 0, 0]]
+        
+    return [False, [0, 0, 0]]
 
 
 

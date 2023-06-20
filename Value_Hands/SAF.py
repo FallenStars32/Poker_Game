@@ -1,4 +1,3 @@
-from deck import create_deck
 from hand_organise import offset_hand, check_reapeats
 from Value_Tracker import high_card
 
@@ -26,7 +25,7 @@ def Straight(hand):
             included = []
     
     
-    return [False]
+    return [False, [0, 0, 0]]
 
 def Flush(hand):
     # Sets up the different groups
@@ -52,18 +51,17 @@ def Flush(hand):
                 if i in hand:
                     hand.remove(i)
             HC = high_card(hand)
-            return [True, [5, HV, HC]]
+            return [True, [6, HV, HC]]
         else:
             continue
         
-    return [False]
+    return [False, [0, 0, 0]]
 
 def straight_flush(hand):
-    A = Flush(hand)
     B = Straight(hand)
+    A = Flush(hand)
     if A[0] == True and B[0] == True:
-        return [True, [B[1][0], B[1][1], B[1][2]]]
+        return [True, [9, B[1][1], B[1][2]]]
     else:
-        return [False]
+        return [False, [0, 0, 0]]
     
-print(straight_flush([1, 2, 3, 4, 5, 6, 7]))
