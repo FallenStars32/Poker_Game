@@ -51,7 +51,7 @@ def Flush(hand):
                 if i in hand:
                     hand.remove(i)
             HC = high_card(hand)
-            return [True, [5, HV, HC]]
+            return [True, [6, HV, HC]]
         else:
             continue
         
@@ -61,7 +61,7 @@ def straight_flush(hand):
     B = Straight(hand)
     A = Flush(hand)
     if A[0] == True and B[0] == True:
-        return [True, [B[1][0], B[1][1], B[1][2]]]
+        return [True, [9, B[1][1], B[1][2]]]
     else:
         return [False, [0, 0, 0]]
     

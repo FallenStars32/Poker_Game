@@ -76,18 +76,18 @@ def straight_flush(hand):
 def royal_flush(hand):
     OFF_hand = offset_hand(hand)
     if flush(hand) is True:
-        if [1, 10, 11, 12, 13] in OFF_hand:
+        if [9, 10, 11, 12, 13] in OFF_hand:
             return [True, [13, 13, 13]]
         
-        else:
-            OFF_hand = sorted(OFF_hand)
-            if OFF_hand[0] == 1:
-                if OFF_hand[1] == 10:
-                    if OFF_hand[2] == 11:
-                        if OFF_hand[3] == 12:
-                            if OFF_hand[4] == 13:
-                                return [True, [13, 13, 13]]
-            return [False, [0, 0, 0]]
+    else:
+        OFF_hand = sorted(OFF_hand)
+        if 9 in OFF_hand:
+            if 10 in OFF_hand:
+                if 11 in OFF_hand:
+                    if 12 in OFF_hand:
+                        if 13 in OFF_hand:
+                            return [True, [13, 13, 13]]
+        return [False, [0, 0, 0]]
         
     return [False, [0, 0, 0]]
 

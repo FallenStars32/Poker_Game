@@ -1,5 +1,5 @@
 import random
-from generate_random import generate_random_numbers
+from Deck.generate_random import generate_random_numbers
 
 
 def create_deck():

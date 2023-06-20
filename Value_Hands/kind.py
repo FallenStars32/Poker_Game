@@ -55,7 +55,7 @@ def kind_checker(hand, type):
     # Begins for loop to check repitatios
     for i in range(len(rep)):
         #Checks to see if there are two of those in the list
-        if rep[i] == type:
+        if rep[i] >= type:
             #If true adds one to amount 
             amount += 1
             #Checks to see if the one included is the newest HV
@@ -65,7 +65,7 @@ def kind_checker(hand, type):
             #Changes the hand place to 0 if used
             dup_hand[i] = 0
     #If there are two points where the number is found twice then it comes out as True and return True and the formula 
-    if amount == type:
+    if amount > type:
         HC = high_card(dup_hand)
         if type == 3:
             V = type + 1
