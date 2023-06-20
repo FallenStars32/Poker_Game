@@ -10,6 +10,8 @@ def hand_value(hand, Test = False):
     '''Added as a short term fix to the full house bug in which it changes the variable hand, which seems local
     Fix for a long term soultion in later phase'''
     dup_hand = sorted(hand)
+    '''Added because straight flush Changes the variable hand. This pervents that from happening'''
+    EX = hand
     Values = [0] * 10
     Values[0] = high_card(hand,True)[1]
     Values[1] = kind_checker(hand, 2)[1]
@@ -19,9 +21,11 @@ def hand_value(hand, Test = False):
     Values[5] = Flush(dup_hand)[1]
     dup_hand = hand
     Values[6] = full_house(dup_hand)[1]
-    Values[7] = kind_checker(hand, 4)[1]
-    Values[8] = straight_flush(hand)[1]
-    Values[9] = royal_flush(hand)[1]
+    dup_hand = hand
+    Values[7] = kind_checker(dup_hand, 4)[1]
+    dup_hand = hand
+    Values[8] = straight_flush(dup_hand)[1]
+    Values[9] = royal_flush(EX)[1]
     
     part1 = []
     for points in Values:
@@ -83,7 +87,6 @@ deck = sorted(deck.create_deck())
 
 
 
-print(hand_value([9, 10, 11, 12, 13], Test = True)) # Should return Royal Flush
 
 print(hand_value([1, 14, 28, 41], Test = True))
 
