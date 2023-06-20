@@ -58,7 +58,7 @@ def Flush(hand):
     return [False, [0, 0, 0]]
 
 def straight_flush(hand):
-    B = Straight(hand)
+    B = Straight(sorted(hand))
     A = Flush(hand)
     if A[0] == True and B[0] == True:
         return [True, [9, B[1][1], B[1][2]]]
