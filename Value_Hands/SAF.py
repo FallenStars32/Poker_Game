@@ -3,12 +3,12 @@ from Value_Tracker import high_card
 
 
 def Straight(hand):
-    hand = sorted(hand)
+    hand = list(set(sorted(hand)))
     included = []
     unincluded = []
     amount = 0
     
-    OF_Hand = offset_hand(hand)
+    OF_Hand = sorted(offset_hand(hand))
     for i in range(len(hand) - 1):
         if hand[i] + 1 == hand[i+1]:
             amount += 1
