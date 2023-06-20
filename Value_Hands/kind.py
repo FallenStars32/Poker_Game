@@ -18,6 +18,8 @@ def full_house(hand):
 """We are dealing with an error in which we can't cauclute pair"""
 
 def two_pair(hand):
+    hand = offset_hand(hand)
+    hand = sorted(hand)
     for i in range(len(hand) - 1):
         Current_Hand = [hand[i], hand[i+1]]
         A = kind_checker(Current_Hand, 2)
@@ -65,7 +67,7 @@ def kind_checker(hand, type):
             #Changes the hand place to 0 if used
             dup_hand[i] = 0
     #If there are two points where the number is found twice then it comes out as True and return True and the formula 
-    if amount > type:
+    if amount >= type:
         HC = high_card(dup_hand)
         if type == 3:
             V = type + 1

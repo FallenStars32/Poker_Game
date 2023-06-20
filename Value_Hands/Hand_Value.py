@@ -18,13 +18,60 @@ def hand_value(hand):
     Values[8] = straight_flush(hand)[1]
     Values[9] = royal_flush(hand)[1]
     
+    part1 = []
+    for points in Values:
+        part1.append(points[0])
+    best_hand = []   
+    
+    # Added to make for loop simpilair 
+    def decrypt(Values):
+        HV = Values[0]
+        HCHC = Values[1]
+        HCV = Values[2]
+        return HV, HCHC, HCV
+    
+    #Added to make for loop simpilair
+    def convert(Values):
+        HP = Values[0]
+        HHC = Values[1]
+        HCV = Values[2]
+        return HP, HHC, HCVA
+        
+    HP = 0
+    HHC = 0
+    HCV = 0
+    for i in Values:
+        HV, HCHC, HCVA = decrypt(i)
+        if HV > HP:
+            HP, HHC, HCV = convert(i)
+        if HV == HP:
+           if  HCHC > HP:
+               HP, HHC, HCV = convert(i)
+               
+           elif HCHC == HP:
+               if HCVA >= HCV:
+                   HP, HHC, HCV = convert(i)
+                   
+                   
+    return [HP, HHC, HCV]
+                   
+            
+            
+                
+    
+    
+            
+        
+        
+        
+    
     
     
     return Values
     
     
 
-deck = deck.create_deck()
+deck = sorted(deck.create_deck())
 
 
-print(two_pair(deck))
+print(hand_value(deck))
