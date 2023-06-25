@@ -1,5 +1,5 @@
 import random
-
+import time
 
 
 def create_deck():
@@ -42,6 +42,9 @@ def cut(deck, split_point):
         
     result += top
     return result
+
+
+
 
 
 

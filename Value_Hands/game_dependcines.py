@@ -3,13 +3,16 @@ from Deck.deck import create_deck, shuffle_deck, cut
 
 # This simulates a shuffle like a casino
 def shuffle1(deck, cut_point):
+    # Three Shuffles
     deck = shuffle_deck(deck)
     deck = shuffle_deck(deck)
     deck = shuffle_deck(deck)
+    #Followed by a Cut which will be choosen by the USER
     deck = cut(deck, cut_point)
     return deck
 
-# This creates the players
+# This creates the players using a list to store their deck 
+''''Note for GUI each number will be attached to a different image'''
 def create_players(player_amount):
     player = []
     for i in range(player_amount):
@@ -67,7 +70,7 @@ def blue_print_game():
     return True 
     
     
-    
+blue_print_game()
     
 
     
