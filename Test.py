@@ -10,27 +10,22 @@ class Card(ctypes.Structure):
 
 lib = ctypes.CDLL('test.so')
 
+# This creates the function used in the deck
 lib.create_deck.argtypes = []
 lib.create_deck.restype = ctypes.POINTER(Card)
 
 
-start_time = time.time()
+lib.shuffle_deck.argtypes = [ctypes.POINTER(Card)]
+lib.shuffle_deck.restype = ctypes.POINTER(Card)
 
-for i in range(0, 100):
-    deck = lib.create_deck()
 
-end_time = time.time()
-time_length = end_time - start_time
+deck = lib.create_deck()
 
-print(f"C did it in {time_length} seconds")
+shuffled_deck = lib.shuffle_deck(deck).contents
 
-start_time = time.time()
+for i in range(0, 52):
+    print(deck[i].value)
 
-for i in range(0, 100):
-    deck = create_deck()
 
-end_time = time.time()
-time_length = end_time - start_time
 
-print(f"Python did it in {time_length} seconds")
 
