@@ -23,8 +23,7 @@ deck = lib.create_deck()
 
 shuffled_deck = lib.shuffle_deck(deck).contents
 
-for i in range(0, 52):
-    print(deck[i].value)
+
 
 
 
