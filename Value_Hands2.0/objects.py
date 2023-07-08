@@ -30,9 +30,16 @@ Hand values are determined by the following
 
 #"This creates a object that repersents card"
 class Cards:
-    def __init__(self, color, value):
+    def __init__(self, color, value, name):
         self.color = color 
         self.value = value 
+        self.name = name
+        
+    def __str__(self):
+        return str(self.name)
+    
+    def __repr__(self):
+        return self.__str__()
         
 
 
