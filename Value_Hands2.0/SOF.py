@@ -35,10 +35,9 @@ def flush(hand):
         elif i == 4:
             d += 1
             
-    if a == 5 or b == 5 or c == 5 or d == 5:
+    if a >= 5 or b >= 5 or c >= 5 or d >= 5: #Fixe it so that this was greater then for the probibility system
         return True
     else:
-        print([a, b, c, d])
         return False 
     
 #Checks for a straight flush    
