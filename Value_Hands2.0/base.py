@@ -50,3 +50,7 @@ print(Calc.odds(hand + middle))
 
 print(Calc.odds(middle))
             
+            
+#Create a forumula to calcute odds 
+
+#Make this forumula more efficent
