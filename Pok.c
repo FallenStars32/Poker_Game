@@ -1,41 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Card 
-{
+typedef struct Card {
     int value;
-    int color; 
-
+    int color;
+    int place;
 } Card;
 
-Card * create_deck()
-{
-    Card deck[52];
-
-    for (int x = 0; x < 4; x++)
-    {
-        for (int y = 2; y < 13; y++)
-        {
-            int i = 0;  
-            deck[i].color = x;
-            deck[i].value = y;
-            i++;
-
+Card * create_deck() {
+    Card * deck = malloc(sizeof(Card) * 52);
+    if (deck == NULL) {
+        return NULL;
+    }
+    for (int i = 0; i < 52; i++) {
+        Card New_Card;
+        New_Card.place = i;
+        if (i <= 13) {
+            New_Card.color = 1;
+            New_Card.value = i + 2;
+        } else if (i <= 26) {
+            New_Card.color = 2;
+            New_Card.value = i - 13 + 2;
+        } else if (i <= 39) {
+            New_Card.color = 3;
+            New_Card.value = i - 26 + 2;
+        } else if (i <= 52) {
+            New_Card.color = 4;
+            New_Card.value = i -39 + 2;
         }
+        deck[i] = New_Card;
     }
-
-    Card * deck1 = deck;
-
-    return deck1;
-
+    return deck;
 }
 
-int main()
+Card * shuffle_deck(Card * deck)
 {
-    Card * deck = create_deck();
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%d\n", deck[i].color);
-    }
-    return 0;
+    
+
 }
+
+int main(void) {
+    Card * deck = create_deck();
+    for (int i = 0; i < 52; i++) {
+        printf("%d \n", deck[i].value);
+    }
+}
+
