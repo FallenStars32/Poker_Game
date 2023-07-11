@@ -35,16 +35,13 @@ Hand values are determined by the following
 
 
 card1 = objects.Cards(4, 13,  0)
-card2 = objects.Cards(4, 2,  0)
-card3 = objects.Cards(2, 13, 0)
-card4 = objects.Cards(2, 5, 0)
-card5 = objects.Cards(4, 12, 0)
-card6 = objects.Cards(1, 13, 0)
+card2 = objects.Cards(4, 13,  0)
 
 
-hand = [card1, card3]
 
-middle = [card2, card4, card5, card6]
+hand = [card1, card2]
+
+middle = []
 
 def odds_winning(hand, middle):
     a = Calc.odds(hand + middle)
@@ -60,7 +57,7 @@ def odds_winning(hand, middle):
             
     odds_losing = 0
             
-    for i in range(highest_index, len(b)):
+    for i in range(highest_index + 1, len(b)):
         if b[i] >= 0:
             odds_losing += b[i]
             
@@ -72,7 +69,3 @@ def odds_winning(hand, middle):
 
 print(odds_winning(hand, middle))
             
-            
-#Create a forumula to calcute odds 
-
-#Make this forumula more efficent
