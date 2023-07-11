@@ -32,6 +32,8 @@ int pair(Card array[], int size)
     
 }
 
+
+
 int main(void)
 {
     Card card1;

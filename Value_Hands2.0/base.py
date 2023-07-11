@@ -42,13 +42,35 @@ card5 = objects.Cards(4, 12, 0)
 card6 = objects.Cards(1, 13, 0)
 
 
-hand = [card1, card2]
+hand = [card1, card3]
 
-middle = [card3, card4, card5, card6]
+middle = [card2, card4, card5, card6]
 
-print(Calc.odds(hand + middle))
+def odds_winning(hand, middle):
+    a = Calc.odds(hand + middle)
+    b = Calc.odds(middle)   
+    #Take highest 100% 
+    
+    
+    highest_index = 0
+    
+    for i in range(len(a)):
+        if a[i] >= 1:
+            highest_index = i
+            
+    odds_losing = 0
+            
+    for i in range(highest_index, len(b)):
+        if b[i] >= 0:
+            odds_losing += b[i]
+            
+    
+            
+        
+    return odds_losing
 
-print(Calc.odds(middle))
+
+print(odds_winning(hand, middle))
             
             
 #Create a forumula to calcute odds 
