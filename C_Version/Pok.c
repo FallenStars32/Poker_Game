@@ -2,12 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "depnecinces.h"
+#include "extra.h"
 
-typedef struct Card {
-    int value;
-    int color;
-    int place;
-} Card;
 
 Card * create_deck() {
     Card * deck = malloc(sizeof(Card) * 52);
@@ -56,6 +52,7 @@ Card * shuffle_deck(Card * deck)
 
 
 }
+
 
 int main(void) {
     Card * deck = create_deck();
