@@ -16,12 +16,12 @@ int * random_generator(int amount) {
 }
 
 
-int power(int num, int power)
+int power(int base, int power)
 {
     int total = 1;
     for (int i = 0; i < power; i++)
     {
-        total = total * num;
+        total = total * base;
     }
 
     return total;
@@ -43,6 +43,8 @@ int* create_empty_array(int size)
 
     return array;
 }
+
+
 
 
 
