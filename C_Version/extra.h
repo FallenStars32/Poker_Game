@@ -27,5 +27,23 @@ int power(int num, int power)
     return total;
 }
 
+int* create_empty_array(int size)
+{
+    int* array = (int*)malloc(size * sizeof(int));
+    if (array == NULL)
+    {
+        // Error: failed to allocate memory
+        return NULL;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        array[i] = 0;
+    }
+
+    return array;
+}
+
+
 
 
