@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 
+
 // These are the strcuture for this file
 typedef struct Card {
     int value;
@@ -15,6 +16,8 @@ typedef struct Output {
     int HOP;
     int HC;
 }  Output;
+
+const Card card_N = {0, 0, 0};
 
 //This is the flush straight flushes and other sections 
 int compare(const void* a, const void* b) {
@@ -472,6 +475,47 @@ int compare_hands(Card hand[], Card hand2[], int size)
     return -100; 
 }
 
+//This is the part where the game happens
+
+
+
+//These are test function
+void printDeck(Card * deck, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (deck[i].color == 0) continue;
+        printf("The card value is %d and the color is %d \n", deck[i].value, deck[i].color);
+    }
+}
+
+
+Card ** preFLop(Card * deck, int players)
+{
+
+    Card ** All_Hands = malloc(sizeof(Card *) * 7);
+
+    int deck_index = 0;
+
+    
+
+    for (int i = 0; i < players; i++)
+    {
+        while (deck[deck_index].color == 0) deck_index += 1; 
+
+        Card * player_hand = malloc(sizeof(Card) * 7); 
+
+        player_hand[0] = deck[deck_index]; 
+        player_hand[1] = deck[deck_index + 1];
+        deck[deck_index] = card_N;
+        deck[deck_index + 1] =card_N; 
+        All_Hands[i] = player_hand;
+    }
+
+    return All_Hands; 
+
+}
+
 
 int main(void)
 {
@@ -508,6 +552,17 @@ int main(void)
     printf("%d \n", eval(hand, size));
 
     printf("%d \n", eval(hand2, size - 2));
+
+    Card * deck = create_deck();
+
+
+
+    Card ** player_hands = preFLop(deck, 3); 
+   
+   
+
+    
+    printDeck(player_hands[2], 2);
 
 }
 
