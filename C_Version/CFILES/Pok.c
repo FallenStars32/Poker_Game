@@ -516,6 +516,68 @@ Card ** preFLop(Card * deck, int players)
 
 }
 
+Card ** Flop(Card * deck, int player, Card ** All_Hands)
+{
+
+    int deck_index = 0;
+    
+    while (deck[deck_index].color == 0) deck_index += 1;
+
+    Card middle[3] = {deck[deck_index], deck[deck_index + 1], deck[deck_index + 2]}; 
+
+    deck[deck_index] = card_N;
+
+    deck[deck_index + 1] = card_N;
+
+    deck[deck_index + 2] = card_N;
+
+    for (int i = 0; i < player; i++)
+    {
+        All_Hands[i][2] = middle[0];
+        All_Hands[i][3] = middle[1];
+        All_Hands[i][4] = middle[2];
+    }
+
+    return All_Hands;
+ }
+
+Card ** Run(Card * deck, int player, Card ** All_Hands)
+{
+
+    int deck_index = 0;
+    
+    while (deck[deck_index].color == 0) deck_index += 1;
+
+    Card middle = deck[deck_index];
+
+    deck[deck_index] = card_N;
+
+    for (int i = 0; i < player; i++)
+    {
+        All_Hands[i][5] = middle;
+    }
+
+    return All_Hands;
+ }
+
+Card ** river(Card * deck, int player, Card ** All_Hands)
+{
+
+    int deck_index = 0;
+    
+    while (deck[deck_index].color == 0) deck_index += 1;
+
+    Card middle = deck[deck_index];
+
+    deck[deck_index] = card_N;
+
+    for (int i = 0; i < player; i++)
+    {
+        All_Hands[i][6] = middle;
+    }
+
+    return All_Hands;
+ }
 
 int main(void)
 {
@@ -558,11 +620,17 @@ int main(void)
 
 
     Card ** player_hands = preFLop(deck, 3); 
+
+    Flop(deck, 3, player_hands);
+
+    Run(deck, 3, player_hands);
+
+    river(deck, 3, player_hands);
    
    
 
     
-    printDeck(player_hands[2], 2);
+    printDeck(player_hands[2], 7);
 
 }
 
