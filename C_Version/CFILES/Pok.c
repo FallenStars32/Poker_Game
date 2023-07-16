@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 
 // These are the strcuture for this file
@@ -16,6 +17,45 @@ typedef struct Output {
     int HOP;
     int HC;
 }  Output;
+
+typedef struct Player 
+{
+    int money;
+    Card * hand;
+    int hand_value;
+    int player_in; 
+    int big_blind;
+    int small_bind;
+} Player;
+
+// This function proints any card
+void printCard(Card card)
+{
+    char value_output[10];
+    char color_output[10];
+    int value = 0;
+    if (card.place <= 10) value = card.value; 
+    else if (card.place == 11) strcpy(value_output, "J");
+
+    else if (card.place == 12) strcpy(value_output, "Q");
+
+    else if (card.place == 13) strcpy(value_output, "K");
+
+    else if (card.place == 14) strcpy(value_output, "A");
+
+    if (card.color == 1) strcpy(color_output, "HEARTS");
+
+    else if (card.color == 2) strcpy(color_output, "DIAMONDS");
+
+    else if (card.color == 3) strcpy(color_output, "SPADES");
+
+    else if (card.color == 4) strcpy(color_output, "CLUBS");
+    if (value == 0) printf("%s ", value_output); 
+
+    else printf("%d ", card.value); 
+
+    printf("%s\n", color_output);
+}
 
 const Card card_N = {0, 0, 0};
 
@@ -37,7 +77,7 @@ int * random_generator(int amount) {
     return array;
 }
 
-
+//This takes an input and sqaurss it
 int power(int base, int power)
 {
     int total = 1;
@@ -579,6 +619,73 @@ Card ** river(Card * deck, int player, Card ** All_Hands)
     return All_Hands;
  }
 
+ Card * deal_two(Card * deck)
+ {
+    int deck_index = 0;
+    while (deck[deck_index].color == 0) deck_index += 1;
+
+    Card * deal_two = malloc(sizeof(Card) * 2);
+
+    deal_two[0] = deck[deck_index];
+    deal_two[1] = deck[deck_index + 1]; 
+
+    deck[deck_index] = card_N;
+    deck[deck_index + 1] = card_N;
+    return deal_two;
+ }
+
+Player ** create_game(int players, int money, Card * deck)
+ {
+    Player ** player_hands = malloc(sizeof(Player *) * players);
+
+    for (int i = 0; i < players; i++)
+    {
+        Player * player = malloc(sizeof(Player)); 
+        player->hand = deal_two(deck);
+        player->money = money / players;
+        player->hand_value = eval(player->hand, 2);
+        player->player_in = 1;
+        player_hands[i] = player;
+
+    }
+
+    //This is where the betting round takes place
+    
+    for (int i = 0; i < players; i++)
+    {
+        Card * cur_hand = player_hands[0]->hand;
+
+        
+
+        for (int i = 0; i < 2; i++) printCard(cur_hand[i]); 
+
+        printf("Are you in or out: ");
+
+        int a;
+        scanf("%d", &a);
+
+        if (a == 0) player_hands[i]->player_in = 0;
+
+        if (player_hands[i]->player_in == 1) player_hands[i]->money -= 500;
+    }
+
+
+    return player_hands;
+
+ }
+
+ //This part runs the simulation
+float SIM_Array(Card * hand, int size)
+{
+
+    Card * deck = create_deck();
+    shuffle_deck(deck);
+    
+
+
+}
+
+
 int main(void)
 {
     Card card1;
@@ -589,7 +696,7 @@ int main(void)
     Card card6;
     Card card7;
 
-    card1.value = 1;
+    card1.value = 2;
     card2.value = 1;
     card3.value = 1;
     card4.value = 1;
@@ -605,32 +712,16 @@ int main(void)
     card6.color = 1;
     card7.color = 1;
 
-    Card hand[] = {card1, card2, card3, card4, card5, card6, card7};
-
-    Card hand2[] = {card3, card4, card5};
-
-    int size = 7;
-
-    printf("%d \n", eval(hand, size));
-
-    printf("%d \n", eval(hand2, size - 2));
+    
+    
 
     Card * deck = create_deck();
-
-
-
-    Card ** player_hands = preFLop(deck, 3); 
-
-    Flop(deck, 3, player_hands);
-
-    Run(deck, 3, player_hands);
-
-    river(deck, 3, player_hands);
-   
-   
-
     
-    printDeck(player_hands[2], 7);
+    Player ** player = create_game(2, 30000, deck);
+
+    printf("%d", player[0]->hand->value);
+
+
 
 }
 
